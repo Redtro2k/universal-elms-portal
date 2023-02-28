@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Actions\Jetstream\DeleteUser;
-use Illuminate\Support\ServiceProvider;
-use Laravel\Jetstream\Jetstream;
+use Illuminate\Support\{ServiceProvider, Hash};
+use Laravel\{Jetstream\Jetstream, Fortify\Fortify};
 
 class JetstreamServiceProvider extends ServiceProvider
 {
@@ -22,7 +22,12 @@ class JetstreamServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configurePermissions();
-
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = User::where('userid', $request->userid)->first();
+            if ($user && Hash::check($request->password, $user->password)) {
+                return $user;
+            }
+        });
         Jetstream::deleteUsersUsing(DeleteUser::class);
     }
 
