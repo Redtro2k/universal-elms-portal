@@ -7,14 +7,24 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import RadioButton from '@/Components/RadioButton.vue';
 
 const form = useForm({
-    name: '',
+    firstname: '',
+    lastname: '',
+    userid: '',
+    gender: '',
+    gender: '',
+    contact_number: '',
+    emergency_contact_number: '',
+    date_of_birth: '',
+    location: '',
     email: '',
     password: '',
     password_confirmation: '',
     terms: false,
 });
+const options = [{value: 'male', label: 'Male'}, {value: 'female', label: 'Female'}, {value: 'other', label: 'Other'}]
 
 const submit = () => {
     form.post(route('register'), {
@@ -32,20 +42,57 @@ const submit = () => {
         </template>
 
         <form @submit.prevent="submit">
+            <!-- first name -->
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="firstname" value="First Name" />
                 <TextInput
                     id="name"
-                    v-model="form.name"
+                    v-model="form.firstname"
                     type="text"
                     class="mt-1 block w-full"
                     required
                     autofocus
-                    autocomplete="name"
+                    autocomplete="firstname"
                 />
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.firstname" />
             </div>
-
+            <!-- last name -->
+            <div class="mt-4">
+                <InputLabel for="lastname" value="Last Name" />
+                <TextInput
+                    id="name"
+                    v-model="form.lastname"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="lastname"
+                />
+                <InputError class="mt-2" :message="form.errors.lastname" />
+            </div>
+            <!-- userid -->
+            <div class="mt-4">
+                <InputLabel for="userid" value="User ID" />
+                <TextInput
+                    id="userid"
+                    v-model="form.userid"
+                    type="number"
+                    class="mt-1 block w-full"
+                    required
+                    autocomplete="userid"
+                />
+                <InputError class="mt-2" :message="form.errors.userid" />
+            </div>
+            <div class="mt-4">
+                <InputLabel for="lastname" value="Gender" />
+                <RadioButton :value="form.gender" :items="options" v-model="form.gender"/>
+            </div>
+            <!-- phone number -->
+            <div class="mt-4">
+                <InputLabel for="lastname" value="Phone Number" />
+                <vue-tel-input v-model="form.contact_number" />
+            </div>
+            <!-- Email -->
             <div class="mt-4">
                 <InputLabel for="email" value="Email" />
                 <TextInput
@@ -58,7 +105,7 @@ const submit = () => {
                 />
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
-
+            <!-- password -->
             <div class="mt-4">
                 <InputLabel for="password" value="Password" />
                 <TextInput
@@ -71,7 +118,7 @@ const submit = () => {
                 />
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
-
+            <!-- password comfirmation -->
             <div class="mt-4">
                 <InputLabel for="password_confirmation" value="Confirm Password" />
                 <TextInput
