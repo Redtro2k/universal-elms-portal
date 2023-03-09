@@ -7,6 +7,12 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import VueTelInput from 'vue-tel-input';
 import 'vue-tel-input/dist/vue-tel-input.css';
+import 'v-calendar/dist/style.css';
+import VCalendar from 'v-calendar';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+library.add(fas)
 
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
@@ -19,6 +25,8 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(VueTelInput)
+            .use(VCalendar)
+            .component('fa', FontAwesomeIcon)
             .mount(el);
     },
     progress: {
