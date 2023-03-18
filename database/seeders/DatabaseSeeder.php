@@ -29,6 +29,6 @@ class DatabaseSeeder extends Seeder
         'date_of_birth' => '2022-03-11 12:00:00',
         'location' => 'bgry. bagong silangan QC',
         'email' => 'llacuna@dev.com',
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi']);
+        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi']); //password
     }
 }
