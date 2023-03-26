@@ -1,6 +1,9 @@
 # universal-elms-portal
  
 ### reconfig the vendor
+
+> vendor/laravel/jetstream/src/HasProfilePhoto.php
+
 ```php
 protected function defaultProfilePhotoUrl()
     {
