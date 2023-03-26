@@ -35,5 +35,9 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::get('/check', function(){
+    dd(auth()->user() ? true : false);
+});
+
 Route::resource('roles', RoleController::class, ['only' => [ 'create']]);
 
