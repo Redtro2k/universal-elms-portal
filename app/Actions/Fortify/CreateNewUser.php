@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use App\Http\Traits\UserProfileValidation;
 
 class CreateNewUser implements CreatesNewUsers
 {
-    use PasswordValidationRules;
+    use PasswordValidationRules, UserProfileValidation;
 
     /**
      * Validate and create a newly registered user.
@@ -20,11 +21,23 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input): User
     {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+            'firstname' => $this->stringRules(),
+            'middlename' => $this->stringRules(),
+            'lastname' => $this->stringRules(),
+            'userid' => $this->stringRules(unique: 'users'),
+            'gender' => $this->stringRules(max: 15),
+            'contact_number' => $this->numberRules(max: 11, unique: 'users'),
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
+
+        // 'contact_number',
+        // 'emergency_contact_number',
+        // 'date_of_birth',
+        // 'location',
+        // 'email',
+        // 'password',
 
         return User::create([
             'name' => $input['name'],

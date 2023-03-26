@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::create([
         'firstname' => 'Darwin',
+        'middlename' => 'Lasquete',
         'lastname' => 'Llacuna',
         'userid' => '02000011885',
         'gender' => 'male',

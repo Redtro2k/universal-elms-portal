@@ -10,6 +10,7 @@ import TextInput from '@/Components/TextInput.vue';
 import RadioButton from '@/Components/RadioButton.vue';
 const form = useForm({
     firstname: '',
+    middlename: '',
     lastname: '',
     userid: '',
     gender: '',
@@ -54,6 +55,20 @@ const submit = () => {
                     autocomplete="firstname"
                 />
                 <InputError class="mt-2" :message="form.errors.firstname" />
+            </div>
+            <!-- middlename -->
+            <div>
+                <InputLabel for="middlename" value="Middle Name" />
+                <TextInput
+                    id="name"
+                    v-model="form.middlename"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="middlename"
+                />
+                <InputError class="mt-2" :message="form.errors.middlename" />
             </div>
             <!-- last name -->
             <div class="mt-4">
