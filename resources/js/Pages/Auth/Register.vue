@@ -14,9 +14,7 @@ const form = useForm({
     lastname: '',
     userid: '',
     gender: '',
-    gender: '',
     contact_number: '',
-    emergency_contact_number: '',
     date_of_birth: '',
     location: '',
     email: '',
@@ -50,7 +48,6 @@ const submit = () => {
                     v-model="form.firstname"
                     type="text"
                     class="mt-1 block w-full"
-                    required
                     autofocus
                     autocomplete="firstname"
                 />
@@ -64,7 +61,6 @@ const submit = () => {
                     v-model="form.middlename"
                     type="text"
                     class="mt-1 block w-full"
-                    required
                     autofocus
                     autocomplete="middlename"
                 />
@@ -78,7 +74,6 @@ const submit = () => {
                     v-model="form.lastname"
                     type="text"
                     class="mt-1 block w-full"
-                    required
                     autofocus
                     autocomplete="lastname"
                 />
@@ -92,7 +87,6 @@ const submit = () => {
                     v-model="form.userid"
                     type="number"
                     class="mt-1 block w-full"
-                    required
                     autocomplete="userid"
                 />
                 <InputError class="mt-2" :message="form.errors.userid" />
@@ -102,11 +96,19 @@ const submit = () => {
                 <InputLabel for="gender" value="Gender" />
                 <RadioButton :value="form.gender" :items="options" v-model="form.gender"/>
             </div>
+            <InputError class="mt-2" :message="form.errors.gender" />
             <!-- phone number -->
             <div class="mt-4">
                 <InputLabel for="lastname" value="Phone Number" />
                 <vue-tel-input v-model="form.contact_number" />
             </div>
+            <InputError class="mt-2" :message="form.errors.contact_number" />
+            <!-- Emergency Contact -->
+            <div class="mt-4">
+                <InputLabel for="emergency_contact" value="Emergency Contact" />
+                <vue-tel-input v-model="form.emergency_contact" />
+            </div>
+            <InputError class="mt-2" :message="form.errors.emergency_contact" />
             <!-- Email -->
             <div class="mt-4">
                 <InputLabel for="email" value="Email" />
@@ -115,7 +117,6 @@ const submit = () => {
                     v-model="form.email"
                     type="email"
                     class="mt-1 block w-full"
-                    required
                     autocomplete="username"
                 />
                 <InputError class="mt-2" :message="form.errors.email" />
@@ -123,10 +124,10 @@ const submit = () => {
             <!-- Date of Birth -->
             <div class="mt-4">
                 <InputLabel for="date_of_birth" value="Date Of Birth" />
-                <v-date-picker class="inline-block w-full" v-model="date">
+                <v-date-picker class="inline-block w-full" v-model="form.date_of_birth">
                     <template v-slot="{ inputValue, togglePopover }">
                         <div class="flex items-center">
-                        <button
+                        <button type="button"
                         class="p-2 bg-blue-100 border border-blue-200 hover:bg-blue-200 text-blue-600 rounded-l focus:bg-blue-500 focus:text-white focus:border-blue-500 focus:outline-none"
                         @click="togglePopover()"
                         >
@@ -149,6 +150,7 @@ const submit = () => {
                     </template>
                 </v-date-picker>
             </div>
+            <InputError class="mt-2" :message="form.errors.date_of_birth" />
             <!-- password -->
             <div class="mt-4">
                 <InputLabel for="password" value="Password" />
@@ -157,7 +159,6 @@ const submit = () => {
                     v-model="form.password"
                     type="password"
                     class="mt-1 block w-full"
-                    required
                     autocomplete="new-password"
                 />
                 <InputError class="mt-2" :message="form.errors.password" />
@@ -170,7 +171,6 @@ const submit = () => {
                     v-model="form.password_confirmation"
                     type="password"
                     class="mt-1 block w-full"
-                    required
                     autocomplete="new-password"
                 />
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />

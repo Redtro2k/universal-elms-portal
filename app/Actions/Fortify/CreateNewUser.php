@@ -24,20 +24,17 @@ class CreateNewUser implements CreatesNewUsers
             'firstname' => $this->stringRules(),
             'middlename' => $this->stringRules(),
             'lastname' => $this->stringRules(),
-            'userid' => $this->numberRules(max: 12, unique: 'users'),
+            'userid' => $this->integerRules(max: 12, unique: 'users'),
             'gender' => $this->stringRules(max: 15),
-            'contact_number' => $this->numberRules(unique: 'users'),
-            'emergency_contact_number' => $this->numberRules(),
+            'contact_number' => $this->integerRules(unique: 'users'),
+            'emergency_contact' => $this->integerRules(),
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
-            'birth_date' => ['required', 'date', 'before_or_equal:today', 'after_or_equal:'.now()->subYears(120)->format('Y-m-d')],
+            'date_of_birth' => ['required', 'date', 'before_or_equal:today', 'after_or_equal:'.now()->subYears(120)->format('Y-m-d')],
             'location' => $this->stringRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
-        // 'location',
-        // 'email',
-        // 'password',
-
+            dd($input);
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
