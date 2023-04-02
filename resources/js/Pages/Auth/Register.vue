@@ -15,6 +15,7 @@ const form = useForm({
     userid: '',
     gender: '',
     contact_number: '',
+    emergency_contact: '',
     date_of_birth: '',
     location: '',
     email: '',
@@ -78,6 +79,19 @@ const submit = () => {
                     autocomplete="lastname"
                 />
                 <InputError class="mt-2" :message="form.errors.lastname" />
+            </div>
+            <!-- location -->
+            <div>
+                <InputLabel for="lastname" value="Last Name" />
+                <TextInput
+                    id="name"
+                    v-model="form.location"
+                    type="text"
+                    class="mt-1 block w-full"
+                    autofocus
+                    autocomplete="Location"
+                />
+                <InputError class="mt-2" :message="form.errors.location" />
             </div>
             <!-- userid -->
             <div class="mt-4">

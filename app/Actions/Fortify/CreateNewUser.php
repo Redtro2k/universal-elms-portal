@@ -7,11 +7,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
-use App\Http\Traits\UserProfileValidation;
+use App\Http\Traits\{UserProfileValidation, InputModified};
+use Carbon\Carbon;
 
 class CreateNewUser implements CreatesNewUsers
 {
-    use PasswordValidationRules, UserProfileValidation;
+    use PasswordValidationRules, UserProfileValidation, InputModified;
 
     /**
      * Validate and create a newly registered user.
@@ -22,21 +23,28 @@ class CreateNewUser implements CreatesNewUsers
     {
         Validator::make($input, [
             'firstname' => $this->stringRules(),
-            'middlename' => $this->stringRules(),
+            'middlename' => $this->stringRules(false),
             'lastname' => $this->stringRules(),
-            'userid' => $this->integerRules(max: 12, unique: 'users'),
+            'userid' => ['required', 'numeric', 'unique:users'],
             'gender' => $this->stringRules(max: 15),
-            'contact_number' => $this->integerRules(unique: 'users'),
-            'emergency_contact' => $this->integerRules(),
+            'location' => $this->stringRules(),
+            'contact_number' => $this->stringRules(),
+            'emergency_contact' => $this->stringRules(),
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'date_of_birth' => ['required', 'date', 'before_or_equal:today', 'after_or_equal:'.now()->subYears(120)->format('Y-m-d')],
-            'location' => $this->stringRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
-            dd($input);
         return User::create([
-            'name' => $input['name'],
+            'firstname' => $input['firstname'],
+            'middlename' => $input['middlename'],
+            'lastname' => $input['lastname'],
+            'userid' => $input['userid'],
+            'gender' => $input['gender'],
+            'contact_number' => $input['contact_number'],
+            'emergency_contact_number' => $input['emergency_contact'],
+            'date_of_birth' => $this->dateModified($input['date_of_birth']),
+            'location' => $input['location'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
