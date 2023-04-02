@@ -3,6 +3,10 @@ import { onMounted, ref } from 'vue';
 
 defineProps({
     modelValue: String,
+    disable: {
+        type: Boolean,
+        default: () => false,
+    }
 });
 
 defineEmits(['update:modelValue']);
@@ -21,8 +25,9 @@ defineExpose({ focus: () => input.value.focus() });
 <template>
     <input
         ref="input"
-        class="border-gray-300 focus:border-rose-500 focus:ring-rose-500 rounded-md shadow-sm"
+        :class="[disable ? 'bg-gray-100' : '', 'border-gray-300 focus:border-rose-500 focus:ring-rose-500 rounded-md shadow-sm']"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
+        :disabled="disable"
     />
 </template>

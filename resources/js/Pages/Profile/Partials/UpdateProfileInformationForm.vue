@@ -8,6 +8,9 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import moment from 'moment/moment';
+import { CalendarIcon,UserIcon } from '@heroicons/vue/24/solid';
+
 
 const props = defineProps({
     user: Object,
@@ -16,8 +19,15 @@ const props = defineProps({
 const form = useForm({
     _method: 'PUT',
     firstname: props.user.firstname,
+    middlename: props.user.middlename,
     lastname: props.user.lastname,
+    contact_number: props.user.contact_number,
+    emergency_contact_number: props.user.emergency_contact_number,
+    date_of_birth: props.user.date_of_birth,
+    location: props.user.location,
+    gender: props.user.gender,
     email: props.user.email,
+    userid: props.user.userid,
     photo: null,
 });
 
@@ -128,7 +138,7 @@ const clearPhotoFileInput = () => {
                 <InputError :message="form.errors.photo" class="mt-2" />
             </div>
 
-            <!-- First name & lastname -->
+            <!-- First name Middle Name & Last Name -->
             <div class="col-span-6 sm:flex sm:space-x-2">
                 <div class="col-span-4">
                     <InputLabel for="firstname" value="First Name" />
@@ -138,6 +148,16 @@ const clearPhotoFileInput = () => {
                         type="text"
                         class="mt-1 block w-full"
                         autocomplete="firstname"
+                    />
+                </div>
+                <div class="col-span-4">
+                    <InputLabel for="middlename" value="Middle Name" />
+                    <TextInput
+                        id="name"
+                        v-model="form.middlename"
+                        type="text"
+                        class="mt-1 block w-full"
+                        autocomplete="middlename"
                     />
                 </div>
                 <div class="col-span-4">
@@ -152,7 +172,69 @@ const clearPhotoFileInput = () => {
                     <InputError :message="form.errors.lastname" class="mt-2" />
                 </div>
             </div>
-            
+            <!-- Contact Number -->
+            <div class="col-span-6 sm:flex sm:space-x-2">
+                <div class="col-span-4">
+                    <InputLabel for="contact_number" value="Phone Number" />
+                    <TextInput
+                        id="name"
+                        v-model="form.contact_number"
+                        type="text"
+                        class="mt-1 block w-full"
+                        autocomplete="contact_number"
+                    />
+                </div>
+                <div class="col-span-4">
+                    <InputLabel for="emergency_contact_number" value="Emergency Contact Number" />
+                    <TextInput
+                        id="name"
+                        v-model="form.emergency_contact_number"
+                        type="text"
+                        class="mt-1 block w-full"
+                        autocomplete="emergency_contact_number"
+                    />
+                </div>
+            </div>
+            <!-- Event -->
+            <div class="col-span-6 sm:flex sm:space-x-4">
+                <div class="col-span-4">
+                    <InputLabel class="block" for="birthdate" value="Birth Date" />
+                    <div class="flex text-gray-700 items-center space-x-2">
+                        <CalendarIcon class="h-5 w-5"/><p class="font-semibold">{{moment(form.date_of_birth).format('MMMM D YYYY')}}</p>
+                    </div>
+                </div>
+                <div class="col-span-4">
+                    <InputLabel class="gender" for="gender" value="Gender" />
+                    <div class="flex text-gray-700 items-center space-x-2">
+                        <UserIcon class="h-5 w-5"/><p class="font-semibold">{{form.gender}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- location -->
+            <div class="col-span-6 sm:col-span-4">
+                <InputLabel for="location" value="Location" />
+                <TextInput
+                    id="location"
+                    v-model="form.location"
+                    type="text"
+                    class="mt-1 block w-full"
+                    autocomplete="location"
+                />
+                <InputError :message="form.errors.location" class="mt-2" />
+            </div>
+            <!-- UserID -->
+            <div class="col-span-6 sm:col-span-4">
+                <InputLabel for="userid" value="User ID" />
+                <TextInput
+                    id="userid"
+                    v-model="form.userid"
+                    type="text"
+                    class="mt-1 block w-full"
+                    autocomplete="userid"
+                    :disable="true"
+                />
+                <InputError :message="form.errors.userid" class="mt-2" />
+            </div>
             <!-- Email -->
             <div class="col-span-6 sm:col-span-4">
                 <InputLabel for="email" value="Email" />

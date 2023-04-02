@@ -19,7 +19,7 @@ defineExpose({ focus: () => input.value.focus() });
           <div v-for="item in items" :key="item.value" class="flex items-center">
             <input :id="item.id" name="item" type="radio" :value="item.value" :checked="props.modelValue === item.value"
             @input="$emit('update:modelValue', $event.target.value)"
-             class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+             class="h-4 w-4 border-gray-300 text-rose-600 focus:ring-rose-500"
              />
             <label :for="item.value" class="ml-3 block text-sm font-medium text-gray-700">{{ item.label }}</label>
           </div>

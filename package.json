@@ -23,6 +23,8 @@
         "@fortawesome/free-regular-svg-icons": "^6.3.0",
         "@fortawesome/free-solid-svg-icons": "^6.3.0",
         "@fortawesome/vue-fontawesome": "^3.0.3",
+        "@heroicons/vue": "^2.0.17",
+        "moment": "^2.29.4",
         "v-calendar": "^3.0.0-alpha.8",
         "vue-tel-input": "^6.0.5"
     }
