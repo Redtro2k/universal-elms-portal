@@ -16,18 +16,26 @@ class CompleteFillingRegistration
     public function handle(Request $request, Closure $next): Response
     {
         $user = auth()->user();
-        switch($user){
+        switch($user->registration_step){
             case 'step1-roles':
                 //? todo using laravel spatie permission
-                return $user->roles == null || !$user->isAdmin ? redirect('/roles') : $next($request);
-            break;
+                if ($user->roles == null || !$user->isAdmin) {
+                    return redirect('/roles');
+                }
+                break;
             case 'step2-education-level':
                 //todo create a MVC for Education level
-                return $user->education_level == null || !$user->isAdmin ? redirect('/education-level') : $next($request);
-            break;
+                if ($user->education_level == null || !$user->isAdmin) {
+                    return redirect('/education-level');
+                }
+                break;
             case 'step3-interest':
                 //todo create a MVC for Interest
-                return $user->interest == null || !user->isAdmin ? redirect('/interest') : $next($request);
+                if ($user->interest == null || !$user->isAdmin) {
+                    return redirect('/interest');
+                }
+                break;
         }
+        return $next($request);
     }
 }

@@ -29,14 +29,15 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    'roles.redirect'
 ])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
 
-Route::get('/check', function(){
-    dd(auth()->user() ? true : false);
+Route::get('/roles', function() {
+    dd('testing');
 });
 
 Route::resource('roles', RoleController::class, ['only' => [ 'create']]);
