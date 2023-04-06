@@ -15,8 +15,8 @@ class RolesMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->user()->roles()->empty()){
-            return redirect()->to('role.create');
+        if(auth()->user()->roles() == null || !auth()->user()->isAdmin()){
+            return redirect()->route('roles.create');
         }else{
             return $next($request);
         }
