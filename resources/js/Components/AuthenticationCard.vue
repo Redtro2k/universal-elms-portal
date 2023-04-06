@@ -3,9 +3,11 @@
         <div>
             <slot name="logo" />
         </div>
-
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-            <slot />
+        <div :class="[$slots.message ? '' : 'mt-6 px-6 py-4']" class="w-full sm:max-w-md bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <slot name="message" />
+            <div :class="[$slots.message ? 'mt-6 px-6 pb-4' : '']">
+                <slot/>
+            </div>
         </div>
     </div>
 </template>

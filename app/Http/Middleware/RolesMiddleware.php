@@ -15,10 +15,14 @@ class RolesMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->user()->roles() == null || !auth()->user()->isAdmin()){
-            return redirect()->route('roles.create');
-        }else{
+        if(auth()->user()->doesnthave('roles')->get() && auth()->user()->isAdmin()){
             return $next($request);
+        }
+        elseif(auth()->user()->doesnthave('roles')->get() && !auth()->user()->isAdmin()){
+            return redirect()->route('processing');
+        }   
+        else{
+            return redirect()->route('roles.create');
         }
     }
 }
