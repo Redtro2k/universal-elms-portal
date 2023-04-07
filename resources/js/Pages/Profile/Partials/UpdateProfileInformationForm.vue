@@ -137,7 +137,11 @@ const clearPhotoFileInput = () => {
 
                 <InputError :message="form.errors.photo" class="mt-2" />
             </div>
-
+            <div class="col-span-6 sm:flex sm:space-x-4">
+                <div v-if="$page.props.user.roles != null" v-for="role in $page.props.user.roles" :key="role">
+                    <span class="inline-flex items-center rounded bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800">{{role}}</span>
+                </div>
+            </div>
             <!-- First name Middle Name & Last Name -->
             <div class="col-span-6 sm:flex sm:space-x-2">
                 <div class="col-span-4">

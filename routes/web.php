@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\{RoleController, DashboardController, SchoolController};
 use Inertia\Inertia;
 
 /*
@@ -26,19 +26,19 @@ use Inertia\Inertia;
     });
 
     Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {
-        Route::middleware([
-            'roles.redirect'
-        ])->group(function() {
-            Route::get('/dashboard', function () {
-                return Inertia::render('Dashboard');
-            })->name('dashboard');
+        Route::middleware(['roles.redirect'])->group(function() {
+            Route::get('/dashboard', DashboardController::class)->name('dashboard');
         });
-    Route::resource('roles', RoleController::class, ['only' => [ 'create']]);
+        Route::resource('roles', RoleController::class, ['only' => [ 'create']]); // roles
+        Route::controller(SchoolController::class)->prefix('school')->group(function() { // school
+            Route::get('/create', 'create')->middleware(['can:admin', 'school.existing'])->name('school.create');
+            Route::get('', 'index')->name('school.index');
+        });
 
-// redirect pages
-    Route::get('/processing', function() {
-        return Inertia::render('AccountProcessing');
-    })->name('processing');
+        // redirect pages
+        Route::get('/processing', function() {
+            return Inertia::render('AccountProcessing');
+        })->name('processing');
 });
 
 
