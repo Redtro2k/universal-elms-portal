@@ -8,11 +8,11 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
             <ApplicationLogo class="block h-12 w-auto" />
 
             <h1 class="mt-8 text-2xl font-medium text-gray-900">
-                Welcome to {{ $page.props.application.info.name }} application!
+                Welcome to {{ $page.props.signed.school.school_name }} application!
             </h1>
 
             <p class="mt-6 text-gray-500 leading-relaxed">
-                The {{ $page.props.application.info.name }} is a cross-platform system designed to meet the needs of schools seeking a comprehensive solution. It provides an effective way to manage users, including students, teachers, and other personnel, as well as the grading system for students, and subject management. Additionally, the system facilitates the handling of essential documentation, such as registration forms for students and teachers. This system also has a social media aspect, allowing users to connect and interact like Facebook, with the ability to post announcements and updates. With the Universal ELMS Portal, you can establish your own school and tailor the system to meet the unique needs of your institution.
+                The {{ $page.props.signed.school.school_name }} is a cross-platform system designed to meet the needs of schools seeking a comprehensive solution. It provides an effective way to manage users, including students, teachers, and other personnel, as well as the grading system for students, and subject management. Additionally, the system facilitates the handling of essential documentation, such as registration forms for students and teachers. This system also has a social media aspect, allowing users to connect and interact like Facebook, with the ability to post announcements and updates. With the Universal ELMS Portal, you can establish your own school and tailor the system to meet the unique needs of your institution.
             </p>
         </div>
 

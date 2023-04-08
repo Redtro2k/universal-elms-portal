@@ -5,10 +5,13 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Traits\AppSession;
+
 
 
 class HandleInertiaRequests extends Middleware
 {
+    use AppSession;
     /**
      * The root template that's loaded on the first page visit.
      *
@@ -42,10 +45,8 @@ class HandleInertiaRequests extends Middleware
             'user' => auth()->user() ?  [
                 'roles' =>  auth()->user()->getRoleNames()
             ] : null,
-            'application' => [
-                'info' => [
-                    'name' => config('app.name')
-                ]
+            'signed' => [
+                'school' => $this->SchoolSigned(false)
             ],
             'breadcrumbs' => explode('/', Route::current()->uri),
         ]);
