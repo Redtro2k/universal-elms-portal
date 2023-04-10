@@ -7,9 +7,15 @@ import InputLabel from '@/Components/InputLabel.vue';
 import TextAreaInput from '@/Components/TextAreaInput.vue';
 import ListDown from '@/Components/ListDown.vue';
 
-import { regions, provinces, citiesMunicipalities } from 'ph-locations';
-import {computed, watchEffect} from 'vue'
+import { psgc } from 'ph-locations';
 
+import {computed, watchEffect, ref} from 'vue'
+
+const {
+  regions,
+  provinces,
+  citiesMunicipalities,
+} = psgc;
 // const cities = citiesMunicipalities.filter((ctm) => ctm.province === 'PH-BTN')
 // cities.forEach((ct) => console.log(ct))
 
@@ -29,7 +35,8 @@ const form = useForm({
     school_name: '',
     school_id: '',
     school_description: '',
-    region: null
+    region: null,
+    province: null
 })
 const regions_com = computed(() => {
   return regions.map(function(obj) {
@@ -38,6 +45,18 @@ const regions_com = computed(() => {
       name: obj.name
     };
   });
+});
+const getProvince = ref([])
+watchEffect(() => {
+  const getProvinces = provinces.filter((p) => p.region === form.region);
+  const province_com = computed(() => getProvinces.map(function(obj) {
+    return {
+      id: obj.code,
+      name: obj.name
+    }
+  }));
+  getProvince.value = province_com.value
+  console.log(getProvince.value)
 });
 </script>
 
@@ -53,7 +72,7 @@ const regions_com = computed(() => {
                         <div>
                           <div>
                             <h3 class="text-lg font-medium leading-6 text-gray-900">Profile</h3>
-                            <p class="mt-1 text-sm text-gray-500">This information will be displayed publicly so be careful what you share.</p>
+                            <p class="mt-1 text-sm text-gray-500">This school information will be displayed publicly so be careful what you share.</p>
                           </div>
                   
                           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -100,13 +119,16 @@ const regions_com = computed(() => {
                   
                         <div class="pt-8">
                           <div>
-                            <h3 class="text-lg font-medium leading-6 text-gray-900">Personal Information</h3>
-                            <p class="mt-1 text-sm text-gray-500">Use a permanent address where you can receive mail.</p>
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">School Locations</h3>
+                            <p class="mt-1 text-sm text-gray-500">Use a permanent address where you can receive mail and find out its location.</p>
                           </div>
                           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                   
                             <div class="sm:col-span-2">
                               <ListDown label="Region" v-model="form.region" :options="regions_com"/>
+                            </div>
+                            <div class="sm:col-span-2">
+                              <ListDown label="Province" v-if="getProvince.length" v-model="form.province" :options="getProvince"/>
                             </div>
                   
                             <div class="sm:col-span-6">
