@@ -6,6 +6,8 @@ import TextInput from '@/Components/TextInput.vue'
 import InputLabel from '@/Components/InputLabel.vue';
 import TextAreaInput from '@/Components/TextAreaInput.vue';
 import ListDown from '@/Components/ListDown.vue';
+import InputError from '@/Components/InputError.vue';
+
 
 import { psgc } from 'ph-locations';
 
@@ -16,8 +18,8 @@ const {
   provinces,
   citiesMunicipalities,
 } = psgc;
-// const cities = citiesMunicipalities.filter((ctm) => ctm.province === 'PH-BTN')
-// cities.forEach((ct) => console.log(ct))
+const cities = citiesMunicipalities.filter((ctm) => ctm.province === 'PH-BTN')
+cities.forEach((ct) => console.log(ct));
 
 // const getProvince = provinces.filter((province) => province.region === 'PH-02');
 // getProvince.forEach((p) => {
@@ -36,7 +38,9 @@ const form = useForm({
     school_id: '',
     school_description: '',
     region: null,
-    province: null
+    province: null,
+    cities: null,
+    school_address: ''
 })
 const regions_com = computed(() => {
   return regions.map(function(obj) {
@@ -47,6 +51,7 @@ const regions_com = computed(() => {
   });
 });
 const getProvince = ref([])
+const getcitiesMunicipalities = ref([])
 watchEffect(() => {
   const getProvinces = provinces.filter((p) => p.region === form.region);
   const province_com = computed(() => getProvinces.map(function(obj) {
@@ -56,8 +61,17 @@ watchEffect(() => {
     }
   }));
   getProvince.value = province_com.value
-  console.log(getProvince.value)
 });
+watchEffect(() => {
+  const getCity = citiesMunicipalities.filter((c) => c.province === form.province);
+  const cities_com = computed(() => getCity.map(function(obj){
+    return {
+      id: obj.code,
+      name: obj.fullName
+    }
+  }))
+  getcitiesMunicipalities.value = cities_com.value
+})
 </script>
 
 <template>
@@ -116,51 +130,41 @@ watchEffect(() => {
                             </div>
                           </div>
                         </div>
-                  
+
                         <div class="pt-8">
                           <div>
                             <h3 class="text-lg font-medium leading-6 text-gray-900">School Locations</h3>
                             <p class="mt-1 text-sm text-gray-500">Use a permanent address where you can receive mail and find out its location.</p>
                           </div>
+                          <InputError class="mt-2" :message="form.errors.region" />
+                          <InputError class="mt-2" :message="form.errors.province" />
+                          <InputError class="mt-2" :message="form.errors.cities" />
                           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                  
                             <div class="sm:col-span-2">
                               <ListDown label="Region" v-model="form.region" :options="regions_com"/>
                             </div>
                             <div class="sm:col-span-2">
                               <ListDown label="Province" v-if="getProvince.length" v-model="form.province" :options="getProvince"/>
                             </div>
-                  
+                            <div class="sm:col-span-2">
+                              <ListDown label="City" v-if="getcitiesMunicipalities.length" v-model="form.cities" :options="getProvince"/>
+                            </div>
                             <div class="sm:col-span-6">
-                              <label for="street-address" class="block text-sm font-medium text-gray-700">Street address</label>
-                              <div class="mt-1">
-                                <input type="text" name="street-address" id="street-address" autocomplete="street-address" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                              </div>
-                            </div>
-                  
-                            <div class="sm:col-span-2">
-                              <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-                              <div class="mt-1">
-                                <input type="text" name="city" id="city" autocomplete="address-level2" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                              </div>
-                            </div>
-                  
-                            <div class="sm:col-span-2">
-                              <label for="region" class="block text-sm font-medium text-gray-700">State / Province</label>
-                              <div class="mt-1">
-                                <input type="text" name="region" id="region" autocomplete="address-level1" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                              </div>
-                            </div>
-                  
-                            <div class="sm:col-span-2">
-                              <label for="postal-code" class="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
-                              <div class="mt-1">
-                                <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                              </div>
+                              <InputLabel for="school-address" value="School Address" />
+                              <TextInput
+                                id="school-address"
+                                v-model="form.school_address"
+                                type="text"
+                                class="mt-1 block w-full"
+                                required
+                                autofocus
+                                autocomplete="school-address"
+                              />
+                              <InputError class="mt-2" :message="form.errors.school_address" />
                             </div>
                           </div>
-                        </div>
-                  
+                          
+                        </div>      
                         <div class="pt-8">
                           <div>
                             <h3 class="text-lg font-medium leading-6 text-gray-900">Notifications</h3>
@@ -220,8 +224,7 @@ watchEffect(() => {
                             </fieldset>
                           </div>
                         </div>
-                      </div>
-                  
+                      </div>              
                       <div class="py-5 mx-6">
                         <div class="flex justify-end">
                           <button type="button" class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Cancel</button>
