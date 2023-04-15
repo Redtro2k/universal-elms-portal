@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('city');
             $table->string('hotline')->nullable();
             $table->string('mobile_number')->nullable();
-            $table->string('social_media')->nullable();
             $table->timestamps();
         });
     }
