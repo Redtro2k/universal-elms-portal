@@ -7,6 +7,7 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import FlashBanner from '@/Components/FlashBanner.vue';
 
 defineProps({
     title: String,
@@ -277,6 +278,7 @@ const logout = () => {
                     <slot name="header" />
                 </div>
             </header>
+            <FlashBanner v-if="$page.props.flash.success != null || $page.props.flash.failed != null" :texts="$page.props.flash"/>
             <!-- Page Content -->
             <main>
                 <slot />

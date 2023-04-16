@@ -60,10 +60,7 @@ watchEffect(() => {
 })
 
 const submit = () => {
-  form.post(route('school.store'), {
-    preserveState: true,
-    preserveScroll: true
-  })
+  form.post(route('school.store'))
 }
 </script>
 
@@ -78,11 +75,9 @@ const submit = () => {
               <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                   <div class="space-y-8 divide-y divide-gray-200 py-8 mx-8">
                       <div>
-                        <div class="flex space-x-4">
+                        <div class="flex space-x-4 items-center">
                           <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="#f43f5e" stroke-width="1.5" class="w-7 h-7 stroke-gray-400">
-                              <path d="M337.8 5.4C327-1.8 313-1.8 302.2 5.4L166.3 96H48C21.5 96 0 117.5 0 144V464c0 26.5 21.5 48 48 48H592c26.5 0 48-21.5 48-48V144c0-26.5-21.5-48-48-48H473.7L337.8 5.4zM256 416c0-35.3 28.7-64 64-64s64 28.7 64 64v96H256V416zM96 192h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V208c0-8.8 7.2-16 16-16zm400 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H512c-8.8 0-16-7.2-16-16V208zM96 320h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V336c0-8.8 7.2-16 16-16zm400 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H512c-8.8 0-16-7.2-16-16V336zM232 176a88 88 0 1 1 176 0 88 88 0 1 1 -176 0zm88-48c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H336V144c0-8.8-7.2-16-16-16z"/>
-                            </svg>
+                            <img :src="'../storage/Assets/icons/building.png'" class="h-16 w-16">
                           </div>
                           <div>
                             <h3 class="text-lg font-medium leading-6 text-gray-900">Profile</h3>

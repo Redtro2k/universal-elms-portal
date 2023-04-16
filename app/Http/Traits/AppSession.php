@@ -27,7 +27,8 @@ trait AppSession{
         }else{
             $temp_school = collect([
                 'school_name' => $allow_acrym ? $this->acronymString(config('app.name')) : config('app.name'),
-                'school_description' => 'Our flexible and fully customizable portal system is designed specifically for schools in need of a dynamic website. With a user-friendly interface and fast loading times, our system allows for seamless communication between teachers, parents, and students.'
+                'school_description' => 'Our flexible and fully customizable portal system is designed specifically for schools in need of a dynamic website. With a user-friendly interface and fast loading times, our system allows for seamless communication between teachers, parents, and students.',
+                'school_id' => null
                 ]);
             return $temp_school;
         }

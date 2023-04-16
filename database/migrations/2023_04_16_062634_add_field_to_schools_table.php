@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('schools', function (Blueprint $table) {
             //
-            $table->text('school_description');
+            $table->text('school_description')->after('school_id');
         });
     }
 

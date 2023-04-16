@@ -19,23 +19,17 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
         <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
             <div>
                 <div class="flex items-center">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="#9ca3af" stroke-width="1.5" class="w-7 h-7 stroke-gray-400">
-                        <path d="M337.8 5.4C327-1.8 313-1.8 302.2 5.4L166.3 96H48C21.5 96 0 117.5 0 144V464c0 26.5 21.5 48 48 48H592c26.5 0 48-21.5 48-48V144c0-26.5-21.5-48-48-48H473.7L337.8 5.4zM256 416c0-35.3 28.7-64 64-64s64 28.7 64 64v96H256V416zM96 192h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V208c0-8.8 7.2-16 16-16zm400 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H512c-8.8 0-16-7.2-16-16V208zM96 320h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V336c0-8.8 7.2-16 16-16zm400 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H512c-8.8 0-16-7.2-16-16V336zM232 176a88 88 0 1 1 176 0 88 88 0 1 1 -176 0zm88-48c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H336V144c0-8.8-7.2-16-16-16z"/>
-                    </svg>
+                    <img :src="'../storage/Assets/icons/building.png'" class="w-10 h-10" alt="">
                     <h2 class="ml-3 text-xl font-semibold text-gray-900">
                         <span>Establish the School</span>
                     </h2>
                 </div>
-
                 <p class="mt-4 text-gray-500 text-sm leading-relaxed">
                     The initial step in setting up our system is to manually create a school profile and ensure that all the necessary requirements and information are provided accurately. It is important to be meticulous when filling out the information as it will be reflected publicly. By following this step, you can ensure that your school's profile is complete and up-to-date, providing a reliable source of information for students, teachers, and other users.
                 </p>
-
                 <p class="mt-4 text-sm">
                     <a :href="route('school.create')" class="inline-flex items-center font-semibold text-rose-700">
                         Establish a School
-
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="ml-1 w-5 h-5 fill-rose-500">
                             <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />
                         </svg>

@@ -11,7 +11,7 @@ use App\Mail\SchoolEmail;
 
 class SchoolController extends Controller
 {
-    public function __constructor(School $school){
+    public function __construct(School $school){
         $this->school = $school;
     }
     public function index(){
@@ -23,16 +23,16 @@ class SchoolController extends Controller
 
     public function store(SchoolRequest $request){
         $request->validated();
-        // $this->school->create([
-        //     'school_name' => $request->input('school_name'),
-        //     'school_id' => $request->input('school_id'),
-        //     'address' => $request->input('school_address'),
-        //     'school_description' => $request->input('school_description'),
-        //     'region' => $request->input('region'),
-        //     'province' => $request->input('province'),
-        //     'city' => $request->input('cities')
-        // ]);
+        $this->school->create([
+            'school_name' => $request->input('school_name'),
+            'school_id' => $request->input('school_id'),
+            'address' => $request->input('school_address'),
+            'school_description' => $request->input('school_description'),
+            'region' => $request->input('region'),
+            'province' => $request->input('province'),
+            'city' => $request->input('cities')
+        ]);
         Mail::to('fake@gmail.com')->send(new SchoolEmail());
-        return redirect()->route('dashboard')->with('success', 'great! Successfully created a new School.');
+        return redirect()->route('dashboard')->with('success', 'Great! Successfully created a new School.');
     }
 }

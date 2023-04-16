@@ -14,7 +14,7 @@ protected function defaultProfilePhotoUrl()
         return 'https://ui-avatars.com/api/?name='.urlencode($name).'&color=f43f5e&background=ffe4e6';
     }
 ```
-
+### for email system
 ```env
 MAIL_MAILER=smtp
 MAIL_HOST=sandbox.smtp.mailtrap.io
