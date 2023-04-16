@@ -11,10 +11,11 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     Route::resource('roles', RoleController::class, ['only' => [ 'create']]); // roles
     Route::controller(SchoolController::class)->prefix('school')->group(function() { // schools
         Route::get('/create', 'create')->middleware(['can:admin', 'school.existing'])->name('school.create');
-        Route::get('', 'index')->name('school.index');
+        Route::get('', 'index')->name('school.index'); 
         Route::post('', 'store')->name('school.store');
     });
 });
+
 Route::controller(RedirectPagesController::class)->group(function(){ // redirect pages
     Route::get('/processing', 'processing') //processing
         ->middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->name('processing');

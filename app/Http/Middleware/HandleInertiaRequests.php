@@ -48,6 +48,10 @@ class HandleInertiaRequests extends Middleware
             'signed' => [
                 'school' => $this->SchoolSigned(false)
             ],
+            'flash' => [
+                'success' => session('success'),
+                'failed' => session('failed')
+            ],
             'breadcrumbs' => explode('/', Route::current()->uri),
         ]);
     }
