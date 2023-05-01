@@ -21,7 +21,7 @@ class RedirectPagesController extends Controller
             'canRegister' => Route::has('register'),
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
-            'schools' => $this->SchoolSigned()
+            'schools' => $this->SchoolSigned(false)
         ]);
     }
 }

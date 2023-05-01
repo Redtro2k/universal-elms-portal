@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, Link, router } from '@inertiajs/vue3';
+import { Head, Link, router, usePage } from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -8,6 +8,9 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import FlashBanner from '@/Components/FlashBanner.vue';
+import Footer from '@/Components/Footer.vue';
+import {computed} from 'vue';
+
 
 defineProps({
     title: String,
@@ -26,14 +29,19 @@ const switchToTeam = (team) => {
 const logout = () => {
     router.post(route('logout'));
 };
+
+const school = computed(() => usePage().props.signed.school);
+
+let navigation = [
+  { name: `About ${school.value.school_name}`, href: '#' }, // under the announcement, blogs, history or brief
+  { name: 'School', href: '#' }, //info of the school, programs
+]
 </script>
 
 <template>
     <div>
         <Head :title="title" />
-
         <Banner />
-
         <div class="min-h-screen bg-gray-100">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
@@ -63,14 +71,12 @@ const logout = () => {
                                         <span class="inline-flex rounded-md">
                                             <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
                                                 {{ $page.props.auth.user.current_team.name }}
-
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                                                 </svg>
                                             </button>
                                         </span>
                                     </template>
-
                                     <template #content>
                                         <div class="w-60">
                                             <!-- Team Management -->
@@ -285,4 +291,5 @@ const logout = () => {
             </main>
         </div>
     </div>
+    <Footer :navigation="navigation"/>
 </template>

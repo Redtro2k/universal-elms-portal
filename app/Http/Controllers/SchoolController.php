@@ -15,7 +15,9 @@ class SchoolController extends Controller
         $this->school = $school;
     }
     public function index(){
-        dd(School::count() != 0);
+        // https://themes.getbootstrap.com/preview/?theme_id=61529 for designing profile
+        // https://play.tailwindcss.com/iAeJddCBG7?size=370x720
+        return Inertia::render('School/Index');
     }
     public function create(){
         return Inertia::render('School/Create');

@@ -16,10 +16,10 @@ class SchoolExisting
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(School::count() == 0){
-            return $next($request);
-        }else{
+        if(School::count() != 0){
             return redirect()->route('school.index');
+        }else{
+            return $next($request);
         }
     }
 }
