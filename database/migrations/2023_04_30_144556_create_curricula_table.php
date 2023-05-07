@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('curricula', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
             $table->text('description');
+            $table->text('program_outcomes');
+            $table->text('specialize_subjects');
+            $table->text('admission_requirements');
             $table->timestamps();
         });
     }

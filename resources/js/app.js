@@ -28,6 +28,9 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview/dist/filep
   // Create FilePond component
   const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview);
 
+  import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
+
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
@@ -40,6 +43,7 @@ createInertiaApp({
             .use(ZiggyVue, Ziggy)
             .use(VueTelInput)
             .use(VCalendar)
+            .component('QuillEditor', QuillEditor)
             .component('fa', FontAwesomeIcon)
             .component('file-pond', vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview))
             .mount(el);

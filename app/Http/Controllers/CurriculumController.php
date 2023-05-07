@@ -8,6 +8,6 @@ use Inertia\Inertia;
 class CurriculumController extends Controller
 {
     public function index(){
-        return Inertia::render('Curriculum/Course/Index');
+        return Inertia::render('Curriculum/Course/CurriculumIndex');
     }
 }
