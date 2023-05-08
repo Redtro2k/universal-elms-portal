@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->string('programs');
             $table->text('program_outcomes');
             $table->text('specialize_subjects');
             $table->text('admission_requirements');
