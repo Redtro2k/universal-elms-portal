@@ -1,7 +1,7 @@
 <x-mail::message>
-# admin add new curriculum
+# New Curriculum
 
-add new curriculum_title in our school
+Someone Created a new Curriculum
 <x-mail::button :url="$url">
 View Curriculum
 </x-mail::button>

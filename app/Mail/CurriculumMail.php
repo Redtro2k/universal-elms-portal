@@ -16,12 +16,6 @@ class CurriculumMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($title)
-    {
-        //
-        $this->title = $title;
-    }
-
     /**
      * Get the message envelope.
      */
@@ -37,8 +31,10 @@ class CurriculumMail extends Mailable
      */
     public function content(): Content
     {
-        return new content(markdown: 'Curriculum', with: [
-            'url' => config('app.url') . "/curriculum"
+        return new content(
+            markdown: 'Curriculum',
+            with: [
+            'url' => config('app.url') . "/curriculum",
         ]);
     }
 

@@ -61,7 +61,11 @@
                                             v-model:content="form.admission_requirements" contentType="html"/>
                                         <InputError class="mt-2" :message="form.errors.admission_requirements" />
                                     </div>
-                                    <div class="mt-4 flex justify-between">
+                                    <div class="mt-4 mb-2">
+                                        <InputLabel from="images" value="Images" />
+                                        <file-pond  ref="getfile" @change="onChangeFile" :options="option"/>
+                                    </div>
+                                    <div class="mt-5 flex justify-between">
                                         <button type="button"
                                             class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                             @click="closeModal">
@@ -97,7 +101,13 @@ import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
 import RadioButton from "@/Components/RadioButton.vue";
 
+const getfile = ref(null)
 
+const option = {
+    allowMultiple: false,
+    acceptedFileTypes: ['image/png', 'image/jpeg'],
+    labelIdle: 'Drag & Drop your files or browse',
+}
 
 const isOpen = ref(false)
 
@@ -113,7 +123,8 @@ const form = useForm({
     programs: null,
     program_outcomes: null,
     specialize_subjects: null,
-    admission_requirements: null
+    admission_requirements: null,
+    images: null
 })
 const options = [
     { value: 'junior_high_school', label: 'Junior High School' },
@@ -121,8 +132,14 @@ const options = [
     { value: 'ternitary_programs', label: 'Ternitary Programs' },
 ];
 
+const onChangeFile = (e) => {
+    form.images = e.target.files[0];
+}
+
 const submit = () => {
     form.post(route('curriculum.store'), {
+        _method: 'put',
+        forceFormData: true,
         preserveScroll: true
     })
 }

@@ -14,7 +14,7 @@ class CurriculumObserver
     public function created(Curriculum $curriculum): void
     {
         //
-        Mail::to('fake@gmail.com')->send(new CurriculumMail('testing'));
+        Mail::to('fake@gmail.com')->send(new CurriculumMail());
     }
 
     /**

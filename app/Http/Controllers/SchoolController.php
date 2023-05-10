@@ -34,7 +34,6 @@ class SchoolController extends Controller
             'province' => $request->input('province'),
             'city' => $request->input('cities')
         ]);
-        Mail::to('fake@gmail.com')->send(new SchoolEmail());
         return redirect()->route('dashboard')->with('success', 'Great! Successfully created a new School.');
     }
 }

@@ -28,7 +28,8 @@ class CurriculumRequest extends FormRequest
             'programs' => 'required|string',
             'program_outcomes' => 'required|string',
             'specialize_subjects' => 'required|string',
-            'admission_requirements' => 'required|string'
+            'admission_requirements' => 'required|string',
+            'images' => 'nullable|image'
         ];
     }
 }
