@@ -14,7 +14,9 @@ class CurriculumController extends Controller
         return $this->curriculum = $curriculum;
     }
     public function index(){
-        return Inertia::render('Curriculum/Course/CurriculumIndex');
+        return Inertia::render('Curriculum/Course/CurriculumIndex', [
+            'curriculum' => $this->curriculum->all()
+        ]);
     }
 
     public function store(CurriculumRequest $request){

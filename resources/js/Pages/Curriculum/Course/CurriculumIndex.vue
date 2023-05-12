@@ -4,6 +4,10 @@ import Breadcrumb from '@/Components/Breadcrumbs.vue';
 import { Link } from '@inertiajs/vue3';
 import CurriculumModal from '@/Pages/Dialog/Modal.vue';
 
+const props = defineProps({
+  curriculum: Object
+})
+
 const stats = [
   { name: 'Total Subscribers', stat: '71,897' },
   { name: 'Avg. Open Rate', stat: '58.16%' },

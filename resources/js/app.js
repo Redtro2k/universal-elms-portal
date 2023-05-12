@@ -22,13 +22,13 @@ import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type/d
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.esm.js';
 
  // Import styles
- import 'filepond/dist/filepond.min.css';
- import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
+import 'filepond/dist/filepond.min.css';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
 
   // Create FilePond component
-  const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview);
+const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview);
 
-  import { QuillEditor } from '@vueup/vue-quill'
+import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 
