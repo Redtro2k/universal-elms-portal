@@ -1,6 +1,9 @@
 <template>
     <button type="button" @click="openModal"
-        class="inline-flex items-center rounded-md border border-transparent bg-rose-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2">
+        class="inline-flex w-full md:w-auto items-self-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="-ml-0.5 mr-2 h-5 w-5">
+            <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+          </svg>
         Create Curriculum
     </button>
     <TransitionRoot appear :show="isOpen" as="template">
@@ -33,6 +36,10 @@
                                         <InputError class="mt-2" :message="form.errors.title" />
                                     </div>
                                     <div class="mt-4">
+                                        <InputLabel from="images" value="Images" />
+                                        <file-pond  ref="getfile" @change="onChangeFile" :options="option"/>
+                                    </div>
+                                    <div class="mt-4">
                                         <InputLabel for="description" value="Description" class="pb-2" />
                                         <QuillEditor theme="snow" placeholder="Description" v-model:content="form.description" contentType="html"/>
                                         <InputError class="mt-2" :message="form.errors.firstname" />
@@ -60,10 +67,6 @@
                                         <QuillEditor theme="snow" placeholder="Admission Requirements"
                                             v-model:content="form.admission_requirements" contentType="html"/>
                                         <InputError class="mt-2" :message="form.errors.admission_requirements" />
-                                    </div>
-                                    <div class="mt-4 mb-2">
-                                        <InputLabel from="images" value="Images" />
-                                        <file-pond  ref="getfile" @change="onChangeFile" :options="option"/>
                                     </div>
                                     <div class="mt-5 flex justify-between">
                                         <button type="button"

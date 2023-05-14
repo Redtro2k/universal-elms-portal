@@ -158,7 +158,7 @@
     title: String,
   });
   const navigation = [
-    { name: 'Curriculum', href: route('curriculum.index'), icon: HomeIcon, current: route().current('curriculum.index') },
+    { name: 'Curriculum', href: route('curriculum.index'), icon: InboxIcon, current: route().current('curriculum.index') },
   ]
   const userNavigation = [
     { name: 'Your Profile', href: route('profile.show') },
