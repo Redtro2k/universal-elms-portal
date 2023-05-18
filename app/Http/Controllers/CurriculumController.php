@@ -15,7 +15,12 @@ class CurriculumController extends Controller
     }
     public function index(){
         return Inertia::render('Curriculum/Course/CurriculumIndex', [
-            'curriculum' => $this->curriculum->all()
+            'curriculum' => $this->curriculum->all()->map(fn($m) => [
+                    'id' => $m->id,
+                    'title' => $m->title,
+                    'description' => $m->description,
+                    'excerpt' => $m->excerpt
+                ])
         ]);
     }
 

@@ -12,7 +12,7 @@ const props = defineProps({
 const stats = [
   { name: 'Students', stat: '1,409' },
   { name: 'Teachers', stat: '58' },
-  { name: 'Cources', stat: '254' },
+  { name: 'Courses', stat: '254' },
 ]
 
 
@@ -103,43 +103,26 @@ const stats = [
                       <table class="min-w-full divide-gray-300">
                         <thead class="bg-gray-100">
                           <tr>
-                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left font-inter text-sm font-medium uppercase text-gray-700 sm:pl-6">Name</th>
-                            <th scope="col" class="px-3 py-3.5 text-left font-inter text-sm font-medium uppercase text-gray-600">Title</th>
-                            <th scope="col" class="px-3 py-3.5 text-left font-inter text-sm font-medium uppercase text-gray-600">Email</th>
-                            <th scope="col" class="px-3 py-3.5 text-left font-inter text-sm font-medium uppercase text-gray-600">Role</th>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left font-inter text-sm font-medium uppercase text-gray-700 sm:pl-6">id</th>
+                            <th scope="col" class="px-3 py-3.5 text-left font-inter text-sm font-medium uppercase text-gray-600">title</th>
+                            <th scope="col" class="px-3 py-3.5 text-left font-inter text-sm font-medium uppercase text-gray-600">description</th>
                             <th scope="col" class="relative py-3.5 pl-3 pr-4 uppercase sm:pr-6">
                               <span class="sr-only">Edit</span>
                             </th>
                           </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
-                          <tr>
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-600 sm:pl-6">Lindsay Walton</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Front-end Developer</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">lindsay.walton@example.com</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Member</td>
+                          <tr v-for="c in props.curriculum" :key="c">
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-600 sm:pl-6">{{c.id}}</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{c.title}}</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{c.excerpt}}</td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                               <a href="#" class="text-blue-600 hover:text-blue-900">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
                                   <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
                                 </svg>
         
-                                <span class="sr-only">, Lindsay Walton</span></a
-                              >
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-600 sm:pl-6">Lindsay Walton</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Front-end Developer</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">lindsay.walton@example.com</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Member</td>
-                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                              <a href="#" class="text-blue-600 hover:text-blue-900">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
-                                  <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
-                                </svg>
-        
-                                <span class="sr-only">, Lindsay Walton</span></a
+                                <span class="sr-only">{{c.title}}</span></a
                               >
                             </td>
                           </tr>
