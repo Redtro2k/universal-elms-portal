@@ -6,10 +6,13 @@ use Illuminate\{Http\Request,  Support\Facades\Mail};
 use Inertia\Inertia;
 use App\Models\Curriculum;
 use App\Http\Requests\CurriculumRequest;
+use App\Http\Traits\StringFilter;
 
 
 class CurriculumController extends Controller
 {
+    use StringFilter;
+
     function __construct(Curriculum $curriculum){
         return $this->curriculum = $curriculum;
     }
@@ -18,12 +21,17 @@ class CurriculumController extends Controller
             'curriculum' => $this->curriculum->all()->map(fn($m) => [
                     'id' => $m->id,
                     'title' => $m->title,
+                    'program' => $this->UpperFirstCharacter($m->programs),
                     'description' => $m->description,
                     'excerpt' => $m->excerpt
                 ])
         ]);
     }
-
+    public function show($id){
+        return Inertia::render('Curriculum/Course/CurriculumShow',[
+            'curriculum' => $this->curriculum->find($id)
+        ]);
+    }
     public function store(CurriculumRequest $request){
         if($request->validated() && $request->hasFile('images')){
             $insert = $this->curriculum->create($request->except('images'));

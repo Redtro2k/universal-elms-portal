@@ -15,7 +15,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::post('', 'store')->name('school.store');
     });
     Route::middleware(['can:admin'])->group(function(){
-        Route::resource('curriculum', CurriculumController::class, ['only' => ['index', 'store']]);
+        Route::resource('curriculum', CurriculumController::class, ['only' => ['index', 'store', 'show']]);
     });
 });
 

@@ -4,6 +4,7 @@ import Breadcrumb from '@/Components/Breadcrumbs.vue';
 import CurriculumModal from '@/Pages/Dialog/Modal.vue';
 import { Menu, MenuButton, MenuItem, MenuItems, Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import { ChevronDownIcon, FunnelIcon } from '@heroicons/vue/20/solid'
+import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
   curriculum: Object
@@ -105,6 +106,7 @@ const stats = [
                           <tr>
                             <th scope="col" class="py-3.5 pl-4 pr-3 text-left font-inter text-sm font-medium uppercase text-gray-700 sm:pl-6">id</th>
                             <th scope="col" class="px-3 py-3.5 text-left font-inter text-sm font-medium uppercase text-gray-600">title</th>
+                            <th scope="col" class="px-3 py-3.5 text-left font-inter text-sm font-medium uppercase text-gray-600">Programs</th>
                             <th scope="col" class="px-3 py-3.5 text-left font-inter text-sm font-medium uppercase text-gray-600">description</th>
                             <th scope="col" class="relative py-3.5 pl-3 pr-4 uppercase sm:pr-6">
                               <span class="sr-only">Edit</span>
@@ -115,15 +117,13 @@ const stats = [
                           <tr v-for="c in props.curriculum" :key="c">
                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-600 sm:pl-6">{{c.id}}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{c.title}}</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{c.program}}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{c.excerpt}}</td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                              <a href="#" class="text-blue-600 hover:text-blue-900">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
-                                  <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
-                                </svg>
-        
-                                <span class="sr-only">{{c.title}}</span></a
-                              >
+                              <Link :href="route('curriculum.show', c.id)" class="text-blue-500">
+                                View
+                                <span class="sr-only">{{c.title}}</span>
+                              </Link>
                             </td>
                           </tr>
                           <!-- More people... -->

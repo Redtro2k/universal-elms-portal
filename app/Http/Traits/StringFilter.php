@@ -10,4 +10,11 @@ trait StringFilter{
         }
         return $get_text;
     }
+    function UpperFirstCharacter($text){
+        $arr = explode("_", $text);
+        foreach($arr as &$element){
+            $element = ucfirst($element);
+        }
+        return implode(" ", $arr);
+    }
 }
