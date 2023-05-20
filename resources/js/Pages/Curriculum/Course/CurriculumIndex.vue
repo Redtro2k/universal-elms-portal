@@ -114,7 +114,7 @@ const stats = [
                           </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
-                          <tr v-for="c in props.curriculum" :key="c">
+                          <tr v-for="c in props.curriculum.data" :key="c">
                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-600 sm:pl-6">{{c.id}}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{c.title}}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{c.program}}</td>

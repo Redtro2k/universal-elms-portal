@@ -152,7 +152,6 @@
   import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
   import { Head, router, Link } from '@inertiajs/vue3'
   import Banner from '@/Components/Banner.vue';
-  import Breadcrumb from '@/Components/Breadcrumbs.vue';
   import ApplicationMark from '@/Components/ApplicationMark.vue';
   const props = defineProps({
     title: String,

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\{Http\Request,  Support\Facades\Mail};
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use App\Models\Curriculum;
 use App\Http\Requests\CurriculumRequest;
 use App\Http\Traits\StringFilter;
+use Spatie\QueryBuilder\QueryBuilder;
+use Request;
 
 
 class CurriculumController extends Controller
@@ -17,14 +19,20 @@ class CurriculumController extends Controller
         return $this->curriculum = $curriculum;
     }
     public function index(){
+        $query = QueryBuilder::for($this->curriculum)
+        ->allowedFilters('title')
+        ->paginate(11)
+        ->through(function($e){
+            return [
+                'id' => $e->id,
+                'title' => $e->title,
+                'program' => $e->label_program,
+                'excerpt' => $e->excerpt
+            ];
+        });
         return Inertia::render('Curriculum/Course/CurriculumIndex', [
-            'curriculum' => $this->curriculum->all()->map(fn($m) => [
-                    'id' => $m->id,
-                    'title' => $m->title,
-                    'program' => $this->UpperFirstCharacter($m->programs),
-                    'description' => $m->description,
-                    'excerpt' => $m->excerpt
-                ])
+            'curriculum' => $query,
+            'filters' => Request::only(['search'])
         ]);
     }
     public function show($id){

@@ -10,13 +10,14 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use App\Http\Traits\StringFilter;
 
 
+
 class Curriculum extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia, StringFilter;
     protected $guarded = [];
 
     protected $appends = [
-        'picture'
+        'picture', 'excerpt', 'label_program'
     ];
     public function registeredMediaConversion(Media $media = null): void
     {
@@ -32,5 +33,8 @@ class Curriculum extends Model implements HasMedia
 
     public function getExcerptAttribute(){
         return $this->excerpText($this->description, 75);
+    }
+    public function getLabelProgramAttribute(){
+        return $this->UpperFirstCharacter($this->programs);
     }
 }
